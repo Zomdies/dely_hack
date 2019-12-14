@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import connect from '@vkontakte/vk-connect';
 import View from '@vkontakte/vkui/dist/components/View/View';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
+import Alert from '@vkontakte/vkui/dist/components/Alert/Alert'
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
 import Persik from './panels/Persik';
 import CreateCard from './panels/create_card';
 // const requestURL = 'http://192.168.43.108:8000/check/id164078040';
+
 
 function sendRequest(method, url){
 	return new Promise( (resolve, reject) =>{
@@ -61,6 +63,26 @@ const App = () => {
 	const [serverData, setServerData] = useState(null);
 	// const [serverData, setServerData] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const go_c = e => {
+		setActivePanel("home");
+	};
+	// const [popout, setPopout] = useState(<Alert
+	// 	actions={[{
+	// 	  title: 'Отмена',
+	// 	  autoclose: true,
+	// 	  style: 'cancel'
+	// 	}, {
+	// 	  title: 'Добавить',
+	// 	  autoclose: true,
+	// 	  action: () => this.addActionLogItem('Право на модерацию контента добавлено.'),
+	// 	}]}
+	// 	onClose={go_c}
+	//   >
+	// 	<h2>Подтвердите действие</h2>
+	// 	<p>Добавить пользователю право на модерацию контента.</p>
+	//   </Alert>);
+
+	
 	
 	
 
@@ -117,9 +139,9 @@ const App = () => {
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
-	const go_c = e => {
-		e === 1 ? setActivePanel("home") : setActivePanel(e.currentTarget.dataset.to);
-	};
+	// const go_c = e => {
+	// 	e === 1 ? setActivePanel("home") : setActivePanel(e.currentTarget.dataset.to);
+	// };
 	
 	
 
@@ -129,7 +151,7 @@ const App = () => {
 			<View activePanel={activePanel} popout={popout}>
 			
 		
-				<Home id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} setPopout={setPopout}/>
+				<Home id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} popout = {popout} setPopout={setPopout}/>
 				<Persik id='persik' go={go} />
 				<CreateCard id='create_card' fetchedUser={fetchedUser}  go={go_c} id_v={id_v}></CreateCard>
 			

@@ -14,7 +14,7 @@ import FormLayout from '@vkontakte/vkui/dist/components/FormLayout/FormLayout'
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 
 
-
+import Card from '../panels/Card';
 
 // var Barcode = require('react-barcode');
 function sendRequest(method, url){
@@ -40,10 +40,11 @@ function sendRequest(method, url){
 
 
 
-const Home = ({ id, go, fetchedUser, id_v, setPopout}) => {
+const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout}) => {
 
 	const [serverData, setServerData] = useState(null);
-
+	const [senderData,setSenderData] = useState(null);
+	//https://moyaposylka.ru/api/v1/trackers/LO530827213CN
 
 	useEffect(() => {
 		
@@ -55,11 +56,18 @@ const Home = ({ id, go, fetchedUser, id_v, setPopout}) => {
 		async function fetchData2() {
 				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+id_v); //164078040
 				setServerData(server);
-				setPopout(null);
+				// setPopout(null);
 			
 		}
+		async function fetchData3() {
+			const dataserver = await sendRequest("GET","https://moyaposylka.ru/api/v1/carriers/LO530827213CN"); //164078040
+			setSenderData(dataserver);
+			// setPopout(null);
+		
+	}
 		fetchData();
 		fetchData2();
+		fetchData3();
 		
 		
 	}, []);
@@ -81,8 +89,11 @@ const Home = ({ id, go, fetchedUser, id_v, setPopout}) => {
 			<div>
 				<p>Welcome {fetchedUser.first_name} {fetchedUser.last_name} </p>
 				<Group title = "List of Your Cards" > 
+				{/* <Card onClick={go} data-to="home" popout = {popout} setPopout = {setPopout} ></Card> */}
+					{/* {serverData.cards && Object.values(serverData.cards).map(v => Object.values(v)).map(item => <Card>{item[0]}</Card>)} */}
 					{serverData.cards && Object.values(serverData.cards).map(v => Object.values(v)).map(item => <div>{item[0]}</div>)}
 					{/* { serverData.cards && console.log(Object.values(serverData.cards).map(v => Object.values(v)))}   */}
+					{senderData&& console.log(serverData)}
 					{serverData.cards &&  setPopout(null)}
 				</Group>
 				<Button size="xl" onClick={go} data-to="create_card">Create Cards</Button>
