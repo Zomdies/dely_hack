@@ -6,11 +6,14 @@ import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
+import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import FormLayout from '@vkontakte/vkui/dist/components/FormLayout/FormLayout'
 // import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
+
+
 
 
 // var Barcode = require('react-barcode');
@@ -37,38 +40,56 @@ function sendRequest(method, url){
 
 
 
-const Home = ({ id, go, fetchedUser, id_v}) => {
+const Home = ({ id, go, fetchedUser, id_v, setPopout}) => {
 
 	const [serverData, setServerData] = useState(null);
 
+
 	useEffect(() => {
 		
-		async function fetchData2() {
-			const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+id_v); //164078040
+		async function fetchData() {
+			const server = await sendRequest("GET","http://192.168.43.108:8000/check/id"+id_v); //164078040
 				setServerData(server);
 		}
+
+		async function fetchData2() {
+				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+id_v); //164078040
+				setServerData(server);
+				setPopout(null);
+			
+		}
+		fetchData();
 		fetchData2();
 		
 		
 	}, []);
-	// const items = [1,2,3,4];
+	let item1 = {name : "hi man"};
+	let items = {name_i : item1};
+	// {serverData && serverData.count_card &&
+	// 	console.log(serverData.count_card+1);
+	// }
 	//style={{backgroundColor : "#545454"}}
 	return (
+		
 	<FormLayout>
 
 	
-	<Panel id={id} theme = "white">
+
+	
+	<Panel id={id} theme = "white" >
 		{fetchedUser && serverData &&
 			<div>
 				<p>Welcome {fetchedUser.first_name} {fetchedUser.last_name} </p>
 				<Group title = "List of Your Cards" > 
-					{serverData.id_card.map(item => <div>{item}</div>)}
+					{serverData.cards && Object.values(serverData.cards).map(v => Object.values(v)).map(item => <div>{item[0]}</div>)}
+					{/* { serverData.cards && console.log(Object.values(serverData.cards).map(v => Object.values(v)))}   */}
+					{serverData.cards &&  setPopout(null)}
 				</Group>
 				<Button size="xl" onClick={go} data-to="create_card">Create Cards</Button>
 			</div>	
 		}	
 		<PanelHeader>YourCards</PanelHeader>
-		{fetchedUser && 
+		{fetchedUser && serverData &&
 		<Group title={serverData && serverData.vk_id}>
 			<Cell
 				before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
@@ -93,6 +114,8 @@ const Home = ({ id, go, fetchedUser, id_v}) => {
 		
 	</Panel>
 	</FormLayout>
+
+	
 	);
 };
 

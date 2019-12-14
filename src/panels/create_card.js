@@ -1,4 +1,4 @@
-import React  from 'react';
+import React,{ useState, useEffect }  from 'react';
 
 import PropTypes from 'prop-types';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
@@ -38,10 +38,40 @@ function sendRequest(method, url){
 }
 
 const CardCreator = props => {
-    function addCard_to_BD(){
+    const [serverData, setServerData] = useState(null);
 
+	useEffect(() => {
+		
+		async function fetchData() {
+			const server = await sendRequest("GET","http://192.168.43.108:8000/check/id"+props.id_v); //164078040
+				setServerData(server);
+		}
+
+		async function fetchData2() {
+				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+props.id_v); //164078040
+				setServerData(server);
+			
+		}
+		fetchData();
+		fetchData2();
+		
+		
+    }, []);
+    
+    function addCard_to_BD(e){
+        
+        
+                sendRequest('GET',"http://192.168.43.108:8000/set?id=id"+props.id_v+"&name="+document.getElementById("input_name").value
+                +"&idcard="+document.getElementById("input_idcard").value).then(data => {
+                    if (data != null) props.go(1);
+                }).catch(err => console.log(err));
+        
+                 //+(serverData.count_cards && (serverData.count_cards+1))
+                // props.go(data-to="persik");
+        
+        
     }
-
+    // data-to="persik"
     return(
         <Panel id={props.id} theme = "white">
             <PanelHeader
@@ -53,10 +83,10 @@ const CardCreator = props => {
 			    <div>
                     <FormLayout>
                         <p>Create Your Card</p>
-                        <Input id ="input_name" type="text" placeholder="Ввидите Название карыт"/>
+                        <Input id ="input_name" type="text" placeholder="Ввидите Название карты"/>
                         <Input id = "input_idcard" type="number" placeholder="Ввидите id карты"/>
                         
-                        <Button size="xl" onClick={props.go} data-to="persik">Create</Button>
+                        <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button>
                     </FormLayout>
 				    
 			    </div>	
