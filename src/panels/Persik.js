@@ -11,11 +11,10 @@ import Icon24Camera from '@vkontakte/icons/dist/24/camera_outline';
 
 
 
-import v1 from '../img/v1.jpg';
-import v2 from '../img/v2.jpg';
-import v3 from '../img/v3.jpg';
+import v1 from '../img/persik.png';
 
-import './Persik.css';
+
+import '../panels/css/Persik.css';
 
 
 
@@ -23,7 +22,7 @@ import './Persik.css';
 
 
 // var Barcode = require('react-barcode');
-
+// {/* <Barcode  value="9070001207126628"   background="#ebedf0" />
 const osName = platform();
 
 
@@ -36,22 +35,9 @@ const Persik = props => (
 				{osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
 			</HeaderButton>}>Persik
 		</PanelHeader>
-		<div className="Persik">
-			<File top="Загрузите ваше фото" before={<Icon24Camera />} size="l">
-         	 Открыть галерею
-        	</File>
-			{/* <Barcode  value="9070001207126628"   background="#ebedf0" />
 
-			<Barcode  value="9070001207126628"   background="#ebedf0" />
 
-			<Barcode  value="9070001207126628"  background="#ebedf0" /> */}
-		</div>
-		
-		{/* <script></script> */}
-		{/* {JsBarcode(data, 'text', {})} */}
 		<img className="Persik" src={v1} alt="Persik The Cat"/>
-		<img className="Persik" src={v2} alt="Persik The Cat"/>
-		<img className="Persik" src={v3} alt="Persik The Cat"/>
 	</Panel>
 );
 

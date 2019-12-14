@@ -8,6 +8,8 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Persik from './panels/Persik';
 import CreateCard from './panels/create_card';
+import Track from './panels/Track';
+import List_adress from './panels/List_adress';
 // const requestURL = 'http://192.168.43.108:8000/check/id164078040';
 
 
@@ -61,8 +63,9 @@ const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
 	const [serverData, setServerData] = useState(null);
+	const [qwe, setQwe] = useState(null);
 	// const [serverData, setServerData] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [popout, setPopout] = useState(null); //<ScreenSpinner size='large' />
 	const go_c = e => {
 		setActivePanel("home");
 	};
@@ -139,6 +142,9 @@ const App = () => {
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
+	const  go_t = e =>  {
+		setActivePanel("track");
+	};
 	// const go_c = e => {
 	// 	e === 1 ? setActivePanel("home") : setActivePanel(e.currentTarget.dataset.to);
 	// };
@@ -148,15 +154,19 @@ const App = () => {
 	return (
 		
 		// {fetchedUser && serverData && } 
-			<View activePanel={activePanel} popout={popout}>
+			<View activePanel={activePanel} popout={popout} theme = "white">
 			
-		
-				<Home id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} popout = {popout} setPopout={setPopout}/>
+				
+				<Home changeState={setQwe} id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} go_t={go_t} popout = {popout} setPopout={setPopout}/>
+				<CreateCard id='create_card' fetchedUser={fetchedUser}  go={go_c} id_v={id_v} popout = {popout} setPopout={setPopout}></CreateCard>
 				<Persik id='persik' go={go} />
-				<CreateCard id='create_card' fetchedUser={fetchedUser}  go={go_c} id_v={id_v}></CreateCard>
+				<Track qwe={qwe} changeState={setQwe} id="track" go={go} id_v={id_v} go_c={go_c} popout={popout} setPopout={setPopout}></Track>
+				<List_adress id="list_adress" go={go} qwe={qwe} popout={popout} setPopout={setPopout} > </List_adress>
+				
+				
 			
 			
-			
+				
 			</View>
 		
 		
@@ -165,6 +175,7 @@ const App = () => {
 		
 		
 	);
+	
 }
 
 

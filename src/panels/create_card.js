@@ -10,10 +10,13 @@ import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Input from '@vkontakte/vkui/dist/components/Input/Input';
 import Select from '@vkontakte/vkui/dist/components/Select/Select';
+import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import FormLayout from '@vkontakte/vkui/dist/components/FormLayout/FormLayout'
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
+
+import '../panels/css/create_card.css';
 
 const osName = platform();
 
@@ -38,8 +41,9 @@ function sendRequest(method, url){
 }
 
 const CardCreator = props => {
+    
     const [serverData, setServerData] = useState(null);
-
+    const [senderData,setSenderData] = useState(null);
 	useEffect(() => {
 		
 		async function fetchData() {
@@ -51,20 +55,31 @@ const CardCreator = props => {
 				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+props.id_v); //164078040
 				setServerData(server);
 			
-		}
+        }
+        
 		fetchData();
-		fetchData2();
+        fetchData2();
+       
 		
 		
     }, []);
     
     function addCard_to_BD(e){
-        
-        
+        var  carriers = "";
+        props.setPopout(<ScreenSpinner size='large' />);
+        fetch("https://cors-anywhere.herokuapp.com/https://moyaposylka.ru/api/v1/carriers/"+document.getElementById("input_track_id").value)
+        .then(response => response.json())
+        .then(result =>{
+            console.log(result[0].code)
+            
                 sendRequest('GET',"http://192.168.43.108:8000/set?id=id"+props.id_v+"&name="+document.getElementById("input_name").value
-                +"&idcard="+document.getElementById("input_idcard").value).then(data => {
-                    if (data != null) props.go(1);
-                }).catch(err => console.log(err));
+                    +"&track_code="+result[0].code+"&track_id="+document.getElementById("input_track_id").value).then(data => {
+                        if (data != null) {props.go(1); props.setPopout(null);}
+                    }).catch(err => console.log(err));
+    
+        }).catch(err => {console.log(err); props.go(1)})
+        
+                
         
                  //+(serverData.count_cards && (serverData.count_cards+1))
                 // props.go(data-to="persik");
@@ -78,13 +93,14 @@ const CardCreator = props => {
             left={<HeaderButton onClick={props.go} data-to="home">
              {osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
         </HeaderButton>} alignment="center">
-            Create Cards</PanelHeader>
+            Add Track Number</PanelHeader>
 		    {props.fetchedUser &&
 			    <div>
                     <FormLayout>
-                        <p>Create Your Card</p>
+                        <p className="info">Add you track number</p>
                         <Input id ="input_name" type="text" placeholder="Ввидите Название карты"/>
-                        <Input id = "input_idcard" type="number" placeholder="Ввидите id карты"/>
+                        {/* <Input id = "input_track_code" type="number" placeholder="Ввидите id карты"/> */}
+                        <Input id = "input_track_id" type="text" placeholder="Ввидите id карты"/>
                         
                         <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button>
                     </FormLayout>

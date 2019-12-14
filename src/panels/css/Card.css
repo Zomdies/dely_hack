@@ -1,7 +1,10 @@
-.FrontCard{
-    display: block;
-    width: 30%;
-    max-width: 100px;
-    margin: 20px auto;
+.FrontCard {
+    /* width: 120px!important;
+    height: 120px;
+    background: #d1d1d1;
+    width: 40%;*/
+    max-width: 100% !important; 
+    /* font-size: 200%;  */
+    margin: 20px auto !important;
   }
   

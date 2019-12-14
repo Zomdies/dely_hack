@@ -1,0 +1,18 @@
+.items{
+    text-align: left;
+}
+.block_items{
+    margin: 10px;
+}
+.Information{
+    text-align: center;
+    font-size: large !important;
+    
+}
+.barcode{
+    text-align: center;
+    font-size: large !important;
+}
+.bt_delete{
+    margin: 0px;
+}
