@@ -1,0 +1,18 @@
+.header_welcome{
+    text-align: center;
+    font-weight:bold;
+    margin: 20px auto !important;
+}
+.header{
+    text-align: center !important; 
+    font-weight:bold;
+}
+/* .egg{
+    /* text-align: end; 
+    position:absolute;
+    bottom:0;
+} */
+/* .p{
+    text-align: center;
+    margin: 20px auto !important;
+} */
