@@ -47,8 +47,17 @@ function load_info(props,setServerData){
     fetch("https://cors-anywhere.herokuapp.com/https://moyaposylka.ru/api/v1/trackers/"+props.qwe[1]+"/"+props.qwe[2])
     .then(response => response.json())
     .then(result =>{
-        console.log(result)
-        setServerData(result);
+        try{
+            if (result.status) {setServerData(null);
+                console.log(result)}
+                else{
+                    console.log(result)
+                    setServerData(result);
+                }
+        }catch{
+
+        }
+        
         props.setPopout(null);
 
     }).catch(err => console.log(err))
@@ -66,13 +75,13 @@ function load_info(props,setServerData){
 const Track = props => {
     function delete_form_bd() {
         sendRequest("GET","https://vk-hack.herokuapp.com/delete?id=id"+props.id_v+"&name="+props.qwe[0]+"&track_code="+props.qwe[1]+"&track_id="+props.qwe[1]).then(data => {
-            console.log("good");
+            // console.log("good");
         });
         props.go_t();
     }
     const [serverData, setServerData] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
-    console.log(props.qwe);
+    // console.log(props.qwe);
     // props.setPopout(null);
     // props.setPopout(<ScreenSpinner size='large' />);
     useEffect(() => {
@@ -80,6 +89,7 @@ const Track = props => {
         
 		async function fetchData() {
             load_info(props,setServerData);
+            
             props.setPopout(<ScreenSpinner size='large' />);
 			// const server = await sendRequest("GET","http://192.168.43.108:8000/check/id"+id_v); //164078040
 				// setServerData(server);
@@ -103,7 +113,8 @@ const Track = props => {
 
     //                     </Group>
     var Barcode = require('react-barcode');
-    console.log(props);
+    // console.log(serverData);
+    // console.log(props);
     return(
         <Panel id={props.id} theme = "white">
             <PanelHeader
@@ -125,14 +136,20 @@ const Track = props => {
 
                     <FormLayout>
                         {serverData &&
-                            <SelectMimicry
+                            <div>
+                                
+                                {/* {serverData==null ? console.log(""):console.log(serverData)} */}
+                                <SelectMimicry
                             top="Посмотреть весь путь"
+                            // {...(serverData==null ? <p>Посылка не отслеживаеться</p>:0)}
                             placeholder={"Статус : ["+serverData.events[0].operationOrigin+"]    "+serverData.events[0].operation}
                             onClick={(e) => {props.changeState(serverData); props.go(e)}} data-to="list_adress"
                             >
                             </SelectMimicry>
+                            </div>
+                            
                         }
-                        
+                        {serverData == null ? <p className="error">TrackError</p>:null}
                         
                         {/* <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button> */}
                         <Button className="bt_delete" size="xl" onClick={delete_form_bd}>Удалить посылку</Button>
