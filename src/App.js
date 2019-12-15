@@ -60,16 +60,30 @@ const App = () => {
 	// const urlParams = new URLSearchParams(this.props.location.search)
 	// const key = urlParams.get('vk_user_id')
 	// var historyObj = window.history;
-	const id_v = new URLSearchParams(window.location.href).get("vk_user_id");	
-	const [activePanel, setActivePanel] = useState('home');
+	const id_v = new URLSearchParams(window.location.href).get("vk_user_id");
+	const [activePanel, setActivePanel] = useState("home");
 	const [fetchedUser, setUser] = useState(null);
 	const [serverData, setServerData] = useState(null);
 	const [qwe, setQwe] = useState(null);
 	// const [serverData, setServerData] = useState(null);
 	const [popout, setPopout] = useState(null); //<ScreenSpinner size='large' />
 	const go_c = e => {
-		connect.send("VKWebAppSetLocation", {"location": "home"});
-		setActivePanel("home");
+		connect.send("VKWebAppSetLocation", {"location": "home"})
+			setActivePanel("home");
+			
+		
+	};
+	const  go_t = e =>  {
+		connect.send("VKWebAppSetLocation", {"location": "home"})
+			setActivePanel("home");
+		
+	};
+	const go = e => {
+		
+		connect.send("VKWebAppSetLocation", {"location": e.currentTarget.dataset.to});
+			setActivePanel(e.currentTarget.dataset.to);
+			console.log(activePanel);
+		
 	};
 	// const [popout, setPopout] = useState(<Alert
 	// 	actions={[{
@@ -141,14 +155,8 @@ const App = () => {
 		
 	}, []);
 
-	const go = e => {
-		connect.send("VKWebAppSetLocation", {"location": e.currentTarget.dataset.to});
-		setActivePanel(e.currentTarget.dataset.to);
-	};
-	const  go_t = e =>  {
-		connect.send("VKWebAppSetLocation", {"location": "track"});
-		setActivePanel("track");
-	};
+	
+	
 	// const go_c = e => {
 	// 	e === 1 ? setActivePanel("home") : setActivePanel(e.currentTarget.dataset.to);
 	// };
@@ -161,10 +169,10 @@ const App = () => {
 			<View activePanel={activePanel} popout={popout} theme = "white" >
 			
 				
-				<Home changeState={setQwe} id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} go_t={go_t} popout = {popout} setPopout={setPopout}/>
+				<Home changeState={setQwe} id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go}  popout = {popout} setPopout={setPopout}/>
 				<CreateCard id='create_card' fetchedUser={fetchedUser}  go={go_c} id_v={id_v} popout = {popout} setPopout={setPopout}></CreateCard>
 				<Persik id='persik' go={go} />
-				<Track qwe={qwe} changeState={setQwe} id="track" go={go} id_v={id_v} go_c={go_c} popout={popout} setPopout={setPopout}></Track>
+				<Track qwe={qwe} changeState={setQwe} id="track" go={go} id_v={id_v} go_t={go_t} popout={popout} setPopout={setPopout}></Track>
 				<List_adress id="list_adress" go={go} qwe={qwe} popout={popout} setPopout={setPopout} > </List_adress>
 				
 				

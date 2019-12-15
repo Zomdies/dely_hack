@@ -44,7 +44,7 @@ function sendRequest(method, url){
 
 
 
-const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout, go_t, changeState}) => {
+const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout, changeState}) => {
 
 	const [serverData, setServerData] = useState(null);
 	

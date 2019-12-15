@@ -68,7 +68,7 @@ const Track = props => {
         sendRequest("GET","https://vk-hack.herokuapp.com/delete?id=id"+props.id_v+"&name="+props.qwe[0]+"&track_code="+props.qwe[1]+"&track_id="+props.qwe[1]).then(data => {
             console.log("good");
         });
-        props.go_c();
+        props.go_t();
     }
     const [serverData, setServerData] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
