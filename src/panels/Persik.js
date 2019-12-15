@@ -33,7 +33,7 @@ const Persik = props => (
 		<PanelHeader
 			left={<HeaderButton onClick={props.go} data-to="home">
 				{osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
-			</HeaderButton>}>Persik
+			</HeaderButton>}>Киса)
 		</PanelHeader>
 
 

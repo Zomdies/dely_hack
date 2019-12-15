@@ -93,16 +93,16 @@ const CardCreator = props => {
             left={<HeaderButton onClick={props.go} data-to="home">
              {osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
         </HeaderButton>} alignment="center">
-            Add Track Number</PanelHeader>
+            Добавить</PanelHeader>
 		    {props.fetchedUser &&
 			    <div>
                     <FormLayout>
-                        <p className="info">Add you track number</p>
-                        <Input id ="input_name" type="text" placeholder="Ввидите Название карты"/>
+                        <p className="info">Введите информацию</p>
+                        <Input id ="input_name" type="text" placeholder="Введите название посылки"/>
                         {/* <Input id = "input_track_code" type="number" placeholder="Ввидите id карты"/> */}
-                        <Input id = "input_track_id" type="text" placeholder="Ввидите id карты"/>
+                        <Input className="text_in" id = "input_track_id" type="text" placeholder="Введите трек номер"/>
                         
-                        <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button>
+                        <Button size="xl" onClick={addCard_to_BD} data-to="home">Создать</Button>
                     </FormLayout>
 				    
 			    </div>	

@@ -58,7 +58,7 @@ const App = () => {
 	// console.log(window.location.href);
 	// const urlParams = new URLSearchParams(this.props.location.search)
 	// const key = urlParams.get('vk_user_id')
-	
+	// var historyObj = window.history;
 	const id_v = new URLSearchParams(window.location.href).get("vk_user_id");	
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
@@ -154,7 +154,7 @@ const App = () => {
 	return (
 		
 		// {fetchedUser && serverData && } 
-			<View activePanel={activePanel} popout={popout} theme = "white">
+			<View activePanel={activePanel} popout={popout} theme = "white" >
 			
 				
 				<Home changeState={setQwe} id='home' fetchedUser={fetchedUser}  id_v={id_v}  go={go} go_t={go_t} popout = {popout} setPopout={setPopout}/>

@@ -92,8 +92,8 @@ const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout, go_t, changeState}
 	<Panel id={id} theme = "white" >
 		{fetchedUser && serverData &&
 			<div>
-				<p className="header_welcome" onClick={go} data-to="persik">Welcome {fetchedUser.first_name} {fetchedUser.last_name} </p>
-				<p className="header_welcome">Your Tracking List</p>
+				<p className="header_welcome" onClick={go} data-to="persik">Здравствуйте, {fetchedUser.first_name} {fetchedUser.last_name} </p>
+				<p className="header_welcome">Список посылок</p>
 				<div> 
 
 				{/* <div>{item[0] == "0" ? null:item[0]}</div> */}
@@ -106,11 +106,11 @@ const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout, go_t, changeState}
 					{/* {senderData&& console.log(serverData)} */}
 					{/* {serverData &&  setPopout(null)} */}
 				</div>
-				<Button size="xl" onClick={go} data-to="create_card">Add Track Number</Button>
+				<Button size="xl" onClick={go} data-to="create_card">Добавить посылку</Button>
 				{/* <Button data-to="track" onClick={(e) => {changeState("ZALUPA"); go(e)}}>asdfasdfasdf</Button> */}
 			</div>	
 		}	
-		<PanelHeader className="header" >Your Parcel</PanelHeader>
+		<PanelHeader className="header" >Моя посылка</PanelHeader>
 		{/* {fetchedUser && serverData &&
 		<Group title={serverData && serverData.vk_id}>
 			<Cell

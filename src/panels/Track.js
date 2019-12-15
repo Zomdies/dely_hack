@@ -110,12 +110,12 @@ const Track = props => {
             left={<HeaderButton onClick={props.go} data-to="home">
              {osName === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
         </HeaderButton>} alignment="center">
-        Information</PanelHeader>
+        Информация</PanelHeader>
 			    <div>  
                 <p></p>
                 <div className="Information">
-                    <p>{"[Track name]  "+props.qwe[0]}</p>
-                    <p>{"[Track number]  " +props.qwe[2] }</p>
+                    <p>{"Название посылки : "+props.qwe[0]}</p>
+                    <p>{"Трек номер посылки :  " +props.qwe[2] }</p>
                 </div>
                 <div className="barcode">
                     {/* <p >Barcode</p> */}
@@ -135,7 +135,7 @@ const Track = props => {
                         
                         
                         {/* <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button> */}
-                        <Button className="bt_delete" size="xl" onClick={delete_form_bd}>Delete Track</Button>
+                        <Button className="bt_delete" size="xl" onClick={delete_form_bd}>Удалить посылку</Button>
                     </FormLayout>
 				    
                     
