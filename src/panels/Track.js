@@ -135,7 +135,7 @@ const Track = props => {
                 
 
                     <FormLayout>
-                        {serverData &&
+                        {serverData && serverData.events[0] &&
                             <div>
                                 
                                 {/* {serverData==null ? console.log(""):console.log(serverData)} */}
@@ -149,7 +149,7 @@ const Track = props => {
                             </div>
                             
                         }
-                        {serverData == null ? <p className="error">TrackError</p>:null}
+                        {serverData  == null ? <p className="error">TrackError</p>:null}
                         
                         {/* <Button size="xl" onClick={addCard_to_BD} data-to="home">Create</Button> */}
                         <Button className="bt_delete" size="xl" onClick={delete_form_bd}>Удалить посылку</Button>
