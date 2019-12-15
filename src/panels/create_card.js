@@ -47,12 +47,12 @@ const CardCreator = props => {
 	useEffect(() => {
 		
 		async function fetchData() {
-			const server = await sendRequest("GET","http://192.168.43.108:8000/check/id"+props.id_v); //164078040
+			const server = await sendRequest("GET","https://vk-hack.herokuapp.com/check/id"+props.id_v); //164078040
 				setServerData(server);
 		}
 
 		async function fetchData2() {
-				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+props.id_v); //164078040
+				const server = await sendRequest("GET","https://vk-hack.herokuapp.com/get/id"+props.id_v); //164078040
 				setServerData(server);
 			
         }
@@ -72,7 +72,7 @@ const CardCreator = props => {
         .then(result =>{
             console.log(result[0].code)
             
-                sendRequest('GET',"http://192.168.43.108:8000/set?id=id"+props.id_v+"&name="+document.getElementById("input_name").value
+                sendRequest('GET',"https://vk-hack.herokuapp.com/set?id=id"+props.id_v+"&name="+document.getElementById("input_name").value
                     +"&track_code="+result[0].code+"&track_id="+document.getElementById("input_track_id").value).then(data => {
                         if (data != null) {props.go(1); props.setPopout(null);}
                     }).catch(err => console.log(err));

@@ -57,13 +57,13 @@ const Home = ({ id, go, fetchedUser, id_v, popout ,setPopout, go_t, changeState}
 		setPopout(<ScreenSpinner size='large' />);
 		async function fetchData() {
 			
-			const server = await sendRequest("GET","http://192.168.43.108:8000/check/id"+id_v); //164078040
+			const server = await sendRequest("GET","https://vk-hack.herokuapp.com/check/id"+id_v); //164078040
 				setServerData(server);
 		}
 
 		async function fetchData2() {
 
-				const server = await sendRequest("GET","http://192.168.43.108:8000/get/id"+id_v); //164078040
+				const server = await sendRequest("GET","https://vk-hack.herokuapp.com/get/id"+id_v); //164078040
 				setServerData(server);
 				setPopout(null);
 				// setPopout(<ScreenSpinner size='large' />);

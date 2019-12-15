@@ -65,10 +65,10 @@ function load_info(props,setServerData){
     
 const Track = props => {
     function delete_form_bd() {
-        sendRequest("GET","http://192.168.43.108:8000/delete?id=id"+props.id_v+"&name="+props.qwe[0]+"&track_code="+props.qwe[1]+"&track_id="+props.qwe[1]).then(data => {
+        sendRequest("GET","https://vk-hack.herokuapp.com/delete?id=id"+props.id_v+"&name="+props.qwe[0]+"&track_code="+props.qwe[1]+"&track_id="+props.qwe[1]).then(data => {
             console.log("good");
         });
-        // props.go_c();
+        props.go_c();
     }
     const [serverData, setServerData] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
