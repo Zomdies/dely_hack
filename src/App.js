@@ -55,6 +55,7 @@ function sendRequest(method, url){
 	// var id_card = [];
 
 const App = () => {
+
 	// console.log(window.location.href);
 	// const urlParams = new URLSearchParams(this.props.location.search)
 	// const key = urlParams.get('vk_user_id')
@@ -67,6 +68,7 @@ const App = () => {
 	// const [serverData, setServerData] = useState(null);
 	const [popout, setPopout] = useState(null); //<ScreenSpinner size='large' />
 	const go_c = e => {
+		connect.send("VKWebAppSetLocation", {"location": "home"});
 		setActivePanel("home");
 	};
 	// const [popout, setPopout] = useState(<Alert
@@ -140,9 +142,11 @@ const App = () => {
 	}, []);
 
 	const go = e => {
+		connect.send("VKWebAppSetLocation", {"location": e.currentTarget.dataset.to});
 		setActivePanel(e.currentTarget.dataset.to);
 	};
 	const  go_t = e =>  {
+		connect.send("VKWebAppSetLocation", {"location": "track"});
 		setActivePanel("track");
 	};
 	// const go_c = e => {
@@ -168,7 +172,6 @@ const App = () => {
 			
 				
 			</View>
-		
 		
 		
 		
